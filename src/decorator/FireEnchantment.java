@@ -1,17 +1,17 @@
 package decorator;
 
-public class FireEnchantment extends WeaponDecorator {
-    public FireEnchantment(Weapon weapon) {
-        super(weapon);
+public class FireEnchantment extends SwordDecorator {
+    public FireEnchantment(IronSword wrapped) {
+        super(wrapped);
     }
 
     @Override
     public int getDamage() {
-        return weapon.getDamage() + 2;
+        return wrapped.getDamage() + 2;
     }
 
     @Override
     public String getDescription() {
-        return weapon.getDescription() + " + Зачарование Огня";
+        return wrapped.getDescription() + " + Зачарование Огня";
     }
 }

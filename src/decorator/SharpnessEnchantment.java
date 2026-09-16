@@ -1,17 +1,17 @@
 package decorator;
 
-public class SharpnessEnchantment extends WeaponDecorator {
-    public SharpnessEnchantment(Weapon weapon) {
-        super(weapon);
+public class SharpnessEnchantment extends SwordDecorator {
+    public SharpnessEnchantment(IronSword wrapped) {
+        super(wrapped);
     }
 
     @Override
     public int getDamage() {
-        return weapon.getDamage() + 3;
+        return wrapped.getDamage() + 3;
     }
 
     @Override
     public String getDescription() {
-        return weapon.getDescription() + " + Острота";
+        return wrapped.getDescription() + " + Острота";
     }
 }

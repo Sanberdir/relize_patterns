@@ -1,7 +1,10 @@
 import adapter.BlockAdapter;
 import adapter.NewBlock;
 import adapter.OldBlock;
+import builder.DiamondSwordBuilder;
+import builder.NetheriteSwordBuilder;
 import builder.Sword;
+import builder.SwordDirector;
 import chain.ArmorHandler;
 import chain.DamageHandler;
 import chain.HealthHandler;
@@ -9,7 +12,6 @@ import chain.ShieldHandler;
 import decorator.FireEnchantment;
 import decorator.IronSword;
 import decorator.SharpnessEnchantment;
-import decorator.Weapon;
 import proxy.Chest;
 import proxy.ChestProxy;
 import strategy.BowAttack;
@@ -69,13 +71,13 @@ public class Main {
     }
 
     static void steveBuilder() {
-        Sword sword = new Sword.Builder("Алмазный меч")
-                .damage(8)
-                .durability(1561)
-                .enchant("Острота V")
-                .enchant("Прочность III")
-                .build();
-        System.out.println(sword);
+        SwordDirector director = new SwordDirector();
+
+        Sword diamond = director.buildEnchantedDiamondSword(new DiamondSwordBuilder());
+        Sword netherite = director.buildSimpleNetheriteSword(new NetheriteSwordBuilder());
+
+        System.out.println(diamond);
+        System.out.println(netherite);
     }
 
     static void steveProxy() {
@@ -85,11 +87,12 @@ public class Main {
     }
 
     static void steveDecorator() {
-        Weapon weapon = new IronSword();
-        weapon = new FireEnchantment(weapon);
-        weapon = new SharpnessEnchantment(weapon);
-        System.out.println("Урон: " + weapon.getDamage());
-        System.out.println("Описание: " + weapon.getDescription());
+        IronSword sword = new IronSword();
+        sword = new FireEnchantment(sword);
+        sword = new SharpnessEnchantment(sword);
+
+        System.out.println("Урон: " + sword.getDamage());
+        System.out.println("Описание: " + sword.getDescription());
     }
 
     static void steveAdapter() {
